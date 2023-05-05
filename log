@@ -318,3 +318,61 @@ sudoku.c:65:5: error: control reaches end of non-void function [-Werror=return-t
 cc1: all warnings being treated as errors
 Compilation failed
 5ce4187
+Fri 05 May 2023 12:58:24 PM UTC: 
+ sudoku.c | 1 -
+ 1 file changed, 1 deletion(-)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:57:11: error: ‘Node’ has no member named ‘state’
+   57 |       if(n->state[i][j]== ‘\0’){
+      |           ^~
+sudoku.c:57:27: error: stray ‘\342’ in program
+   57 |       if(n->state[i][j]== ‘\0’){
+      |                           ^
+sudoku.c:57:28: error: stray ‘\’ in program
+   57 |       if(n->state[i][j]== ‘\0’){
+      |                            ^
+sudoku.c:57:30: error: stray ‘\342’ in program
+   57 |       if(n->state[i][j]== ‘\0’){
+      |                              ^
+sudoku.c:59:14: error: ‘Node’ has no member named ‘state’
+   59 |         adj_n->state = n->state;
+      |              ^~
+sudoku.c:59:25: error: ‘Node’ has no member named ‘state’
+   59 |         adj_n->state = n->state;
+      |                         ^~
+sudoku.c:60:14: error: ‘Node’ has no member named ‘state’
+   60 |         adj_n->state[i][j] = new_move;
+      |              ^~
+sudoku.c:61:14: error: ‘Node’ has no member named ‘last_move’
+   61 |         adj_n->last_move = new_move;
+      |              ^~
+sudoku.c:62:9: error: implicit declaration of function ‘push_back’; did you mean ‘pushBack’? [-Werror=implicit-function-declaration]
+   62 |         push_back(lista, adj_n);
+      |         ^~~~~~~~~
+      |         pushBack
+sudoku.c:62:19: error: ‘lista’ undeclared (first use in this function); did you mean ‘list’?
+   62 |         push_back(lista, adj_n);
+      |                   ^~~~~
+      |                   list
+sudoku.c:62:19: note: each undeclared identifier is reported only once for each function it appears in
+sudoku.c:53:7: error: unused variable ‘list’ [-Werror=unused-variable]
+   53 | List* list=createList();
+      |       ^~~~
+sudoku.c: At top level:
+sudoku.c:65:3: error: expected identifier or ‘(’ before ‘}’ token
+   65 |   }
+      |   ^
+sudoku.c:66:3: error: expected identifier or ‘(’ before ‘return’
+   66 |   return list;
+      |   ^~~~~~
+sudoku.c:67:1: error: expected identifier or ‘(’ before ‘}’ token
+   67 | }
+      | ^
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:64:5: error: control reaches end of non-void function [-Werror=return-type]
+   64 |     }
+      |     ^
+cc1: all warnings being treated as errors
+Compilation failed
+c00a920

@@ -52,7 +52,6 @@ int is_valid(Node* n){
 List* get_adj_nodes(Node* n){
 List* list=createList();
 int i,j; char new_move;
-  if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
   for(i=0;i<3;i++)
     for(j=0;j<3;j++)
       if(n->state[i][j]== ‘\0’){
