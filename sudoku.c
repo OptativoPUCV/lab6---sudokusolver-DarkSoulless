@@ -50,22 +50,22 @@ int is_valid(Node* n){
 
 
 List* get_adj_nodes(Node* n){
- List* lista=createList();
- int i,j; char new_move;
- if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
- for(i=0;i<3;i++)
-   for(j=0;j<3;j++)
+List* list=createList();
+int i,j; char new_move;
+  if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
+  for(i=0;i<3;i++)
+    for(j=0;j<3;j++)
       if(n->state[i][j]== ‘\0’){
         Node *adj_n = (Node*) malloc(sizeof(Node));
         adj_n->state = n->state;
         adj_n->state[i][j] = new_move;
         adj_n->last_move = new_move;
         push_back(lista, adj_n);
-      }  
+      }
     }
   }
+  return list;
 }
-
 
 
 int is_final(Node* n){

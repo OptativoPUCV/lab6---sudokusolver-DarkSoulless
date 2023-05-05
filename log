@@ -233,3 +233,88 @@ sudoku.c:65:5: error: control reaches end of non-void function [-Werror=return-t
 cc1: all warnings being treated as errors
 Compilation failed
 5dcec76
+Fri 05 May 2023 12:56:53 PM UTC: 
+ sudoku.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:55:7: error: ‘Node’ has no member named ‘last_move’
+   55 |   if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
+      |       ^~
+sudoku.c:55:20: error: stray ‘\342’ in program
+   55 |   if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
+      |                    ^
+sudoku.c:55:22: error: stray ‘\342’ in program
+   55 |   if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
+      |                      ^
+sudoku.c:55:21: error: ‘x’ undeclared (first use in this function)
+   55 |   if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
+      |                     ^
+sudoku.c:55:21: note: each undeclared identifier is reported only once for each function it appears in
+sudoku.c:55:34: error: stray ‘\342’ in program
+   55 |   if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
+      |                                  ^
+sudoku.c:55:36: error: stray ‘\342’ in program
+   55 |   if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
+      |                                    ^
+sudoku.c:55:35: error: ‘o’ undeclared (first use in this function)
+   55 |   if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
+      |                                   ^
+sudoku.c:55:53: error: stray ‘\342’ in program
+   55 |   if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
+      |                                                     ^
+sudoku.c:55:55: error: stray ‘\342’ in program
+   55 |   if(n->last_move==‘x’) new_move=‘o’; else new_move=‘x’;
+      |                                                       ^
+sudoku.c:58:11: error: ‘Node’ has no member named ‘state’
+   58 |       if(n->state[i][j]== ‘\0’){
+      |           ^~
+sudoku.c:58:27: error: stray ‘\342’ in program
+   58 |       if(n->state[i][j]== ‘\0’){
+      |                           ^
+sudoku.c:58:28: error: stray ‘\’ in program
+   58 |       if(n->state[i][j]== ‘\0’){
+      |                            ^
+sudoku.c:58:30: error: stray ‘\342’ in program
+   58 |       if(n->state[i][j]== ‘\0’){
+      |                              ^
+sudoku.c:60:14: error: ‘Node’ has no member named ‘state’
+   60 |         adj_n->state = n->state;
+      |              ^~
+sudoku.c:60:25: error: ‘Node’ has no member named ‘state’
+   60 |         adj_n->state = n->state;
+      |                         ^~
+sudoku.c:61:14: error: ‘Node’ has no member named ‘state’
+   61 |         adj_n->state[i][j] = new_move;
+      |              ^~
+sudoku.c:62:14: error: ‘Node’ has no member named ‘last_move’
+   62 |         adj_n->last_move = new_move;
+      |              ^~
+sudoku.c:63:9: error: implicit declaration of function ‘push_back’; did you mean ‘pushBack’? [-Werror=implicit-function-declaration]
+   63 |         push_back(lista, adj_n);
+      |         ^~~~~~~~~
+      |         pushBack
+sudoku.c:63:19: error: ‘lista’ undeclared (first use in this function); did you mean ‘list’?
+   63 |         push_back(lista, adj_n);
+      |                   ^~~~~
+      |                   list
+sudoku.c:53:7: error: unused variable ‘list’ [-Werror=unused-variable]
+   53 | List* list=createList();
+      |       ^~~~
+sudoku.c: At top level:
+sudoku.c:66:3: error: expected identifier or ‘(’ before ‘}’ token
+   66 |   }
+      |   ^
+sudoku.c:67:3: error: expected identifier or ‘(’ before ‘return’
+   67 |   return list;
+      |   ^~~~~~
+sudoku.c:68:1: error: expected identifier or ‘(’ before ‘}’ token
+   68 | }
+      | ^
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:65:5: error: control reaches end of non-void function [-Werror=return-type]
+   65 |     }
+      |     ^
+cc1: all warnings being treated as errors
+Compilation failed
+5ce4187
