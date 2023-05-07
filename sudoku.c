@@ -4,28 +4,34 @@
 
 
 List* get_adj_nodes(Node* n){
-    List* list=createList();
-    int i,j;
-    // Iterar sobre todas las casillas del tablero
-    for(i=0;i<9;i++){
-        for(j=0;j<9;j++){
-            // Si la casilla está vacía
-            if(n->sudo[i][j]==0){
-                int k;
-                // Intentar colocar un número en la casilla vacía
-                for(k=1;k<=9;k++){
-                    if(is_valid(n, i, j, k)){ // Si la colocación es válida
-                        Node* new_node = copy(n);
-                        new_node->sudo[i][j] = k; // Actualizar el tablero con el nuevo número
-                        pushBack(list, new_node); // Agregar el nuevo nodo a la lista de adyacentes
-                    }
-                }
-                return list; // Como sólo se puede colocar un número en una casilla, se devuelve la lista en este punto
+    List* list = createList();
+    int i, j;
+    bool found_empty_cell = false;
+
+    // Encontrar la primera casilla vacía
+    for (i = 0; i < 9 && !found_empty_cell; i++) {
+        for (j = 0; j < 9 && !found_empty_cell; j++) {
+            if (n->sudo[i][j] == 0) {
+                found_empty_cell = true;
             }
         }
     }
-    return list; // En caso de que el tablero ya esté completo, se devuelve la lista vacía
+
+    // Generar los nodos adyacentes para la casilla vacía encontrada
+    if (found_empty_cell) {
+        int row = i - 1;
+        int col = j - 1;
+
+        for (int num = 1; num <= 9; num++) {
+            Node* new_node = copy(n);
+            new_node->sudo[row][col] = num;
+            pushBack(list, new_node);
+        }
+    }
+
+    return list;
 }
+
 
 
 int is_valid(Node* n){
