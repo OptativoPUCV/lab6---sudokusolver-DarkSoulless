@@ -1834,3 +1834,31 @@ sudoku.c:145:1: error: control reaches end of non-void function [-Werror=return-
 cc1: all warnings being treated as errors
 Compilation failed
 2f693b8
+Sun 07 May 2023 03:55:09 AM UTC: 
+ sudoku.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘DFS’:
+sudoku.c:138:10: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘*’ token
+  138 |     node * aux=first (adj);
+      |          ^
+sudoku.c:139:11: error: ‘aux’ undeclared (first use in this function)
+  139 |     while(aux){
+      |           ^~~
+sudoku.c:139:11: note: each undeclared identifier is reported only once for each function it appears in
+sudoku.c:144:3: error: value computed is not used [-Werror=unused-value]
+  144 |   *cont++;
+      |   ^~~~~~~
+sudoku.c:145:8: error: ‘n’ undeclared (first use in this function)
+  145 |   free(n);
+      |        ^
+sudoku.c:146:8: error: ‘ini’ undeclared (first use in this function); did you mean ‘int’?
+  146 |   free(ini);
+      |        ^~~
+      |        int
+sudoku.c:147:1: error: control reaches end of non-void function [-Werror=return-type]
+  147 | }
+      | ^
+cc1: all warnings being treated as errors
+Compilation failed
+aedbb1b
