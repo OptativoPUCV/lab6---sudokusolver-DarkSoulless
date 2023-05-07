@@ -1793,3 +1793,44 @@ test.c:7:8: error: ‘_strdup’ defined but not used [-Werror=unused-function]
 cc1: all warnings being treated as errors
 Compilation failed
 a295929
+Sun 07 May 2023 03:52:35 AM UTC: 
+ sudoku.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘DFS’:
+sudoku.c:133:10: error: implicit declaration of function ‘size’ [-Werror=implicit-function-declaration]
+  133 |   while (size(S)!=0){
+      |          ^~~~
+sudoku.c:134:5: error: unknown type name ‘node’; did you mean ‘Node’?
+  134 |     node *n=top(S);
+      |     ^~~~
+      |     Node
+sudoku.c:136:18: error: passing argument 1 of ‘is_final’ from incompatible pointer type [-Werror=incompatible-pointer-types]
+  136 |     if (is_final(n)) continue;
+      |                  ^
+      |                  |
+      |                  int *
+sudoku.c:119:20: note: expected ‘Node *’ but argument is of type ‘int *’
+  119 | int is_final(Node* n){
+      |              ~~~~~~^
+sudoku.c:137:30: error: passing argument 1 of ‘get_adj_nodes’ from incompatible pointer type [-Werror=incompatible-pointer-types]
+  137 |     List * adj=get_adj_nodes(n),
+      |                              ^
+      |                              |
+      |                              int *
+sudoku.c:96:27: note: expected ‘Node *’ but argument is of type ‘int *’
+   96 | List* get_adj_nodes(Node* n){
+      |                     ~~~~~~^
+sudoku.c:138:10: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘*’ token
+  138 |     node * aux=first (adj);
+      |          ^
+sudoku.c:139:11: error: ‘aux’ undeclared (first use in this function)
+  139 |     while(aux){
+      |           ^~~
+sudoku.c:139:11: note: each undeclared identifier is reported only once for each function it appears in
+sudoku.c:145:1: error: control reaches end of non-void function [-Werror=return-type]
+  145 | }
+      | ^
+cc1: all warnings being treated as errors
+Compilation failed
+2f693b8
