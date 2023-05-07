@@ -3,28 +3,23 @@
 #include "list.h"
 
 
-List* get_adj_nodes(Node* n) {
-    List* list = createList();
-    
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
-            if (n->sudo[i][j] == 0) {
-                for (int k = 1; k < 10; k++) {
-                    Node* nuevo = createNode();
-                    *nuevo = *n;
-                    nuevo->sudo[i][j] = k;
-                    if (is_valid(nuevo)) {
-                        pushBack(list, nuevo);
-                    } else {
-                        free(nuevo);
-                    }
-                }
-                return list;
-            }
+List* get_adj_nodes(Node* n){
+  List* list=createList();
+  int i, j;
+  for(i=0; i<9; i++){
+    for(j=0; j<9; j++){
+      if(n->sudo[i][j]==0){
+        for(int k=1; k<10; k++){
+          Node* nuevo = createNode();
+          nuevo =copy(n);
+          nuevo->sudo[i][j]=k;
+          if(is_valid(nuevo)) pushBack(list, nuevo);    
         }
+        return list;
+      }
     }
-    
-    return list;
+  }
+  return list;
 }
 
 
