@@ -144,7 +144,7 @@ Node* DFS(Node* initial, int* cont){
     free(n);
   }
   free(initial);
-  return null;
+  return NULL;
 }
 /*
 int main( int argc, char *argv[] ){
