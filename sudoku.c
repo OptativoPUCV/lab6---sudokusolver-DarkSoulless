@@ -3,45 +3,30 @@
 #include "list.h"
 
 
-typedef struct{
-   int sudo[9][9];
-}Node;
-
-Node* createNode(){
-  Node* n=(Node*) malloc(sizeof(Node));
-  return n;
-}
-
-Node* copy(Node* n){
-    Node* new=(Node*) malloc(sizeof(Node));
-    *new = *n;
-    return new;
-}
-
-Node* read_file (char* file_name){
-  Node* n = createNode();
-  FILE* file = fopen (file_name, "r");
-  int i,j;
-  for(i=0;i<9;i++){
-       for(j=0;j<9;j++){
-          if(!fscanf (file, "%d", &n->sudo[i][j]))
-            printf("failed to read data!");
-       }
-  }
-
-  fclose (file);
-  return n;
-}
-
-void print_node(Node* n){
+List* get_adj_nodes(Node* n){
+    List* list=createList();
     int i,j;
+    // Iterar sobre todas las casillas del tablero
     for(i=0;i<9;i++){
-       for(j=0;j<9;j++)
-          printf("%d ", n->sudo[i][j]);
-       printf("\n");
+        for(j=0;j<9;j++){
+            // Si la casilla está vacía
+            if(n->sudo[i][j]==0){
+                int k;
+                // Intentar colocar un número en la casilla vacía
+                for(k=1;k<=9;k++){
+                    if(is_valid(n, i, j, k)){ // Si la colocación es válida
+                        Node* new_node = copy(n);
+                        new_node->sudo[i][j] = k; // Actualizar el tablero con el nuevo número
+                        pushBack(list, new_node); // Agregar el nuevo nodo a la lista de adyacentes
+                    }
+                }
+                return list; // Como sólo se puede colocar un número en una casilla, se devuelve la lista en este punto
+            }
+        }
     }
-    printf("\n");
+    return list; // En caso de que el tablero ya esté completo, se devuelve la lista vacía
 }
+
 
 int is_valid(Node* n){
 
