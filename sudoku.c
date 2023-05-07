@@ -4,16 +4,20 @@
 
 
 List* get_adj_nodes(Node* n){
-  List* list=createList();
-  int i, j;
-  for(i=0; i<9; i++){
-    for(j=0; j<9; j++){
-      if(n->sudo[i][j]==0){
-        for(int k=1; k<10; k++){
+  List* list = createList();
+  
+  for (int i = 0; i < 9; i++){
+    for (int j = 0; j < 9; j++){
+      if (n->sudo[i][j] == 0){
+        for (int k = 1; k < 10; k++){
           Node* nuevo = createNode();
-          nuevo =copy(n);
-          nuevo->sudo[i][j]=k;
-          if(is_valid(nuevo)) pushBack(list, nuevo);    
+          *nuevo = *n;
+          nuevo->sudo[i][j] = k;
+          if (is_valid(nuevo)){
+            pushBack(list, nuevo);
+          }else{
+            free(nuevo);
+          }
         }
         return list;
       }
@@ -25,65 +29,53 @@ List* get_adj_nodes(Node* n){
 
 
 
+
 int is_valid(Node* n){
-
-    return 1;
-}
-
-
-List* get_adj_nodes(Node* n){
- List* list=createList();
- State* current_state = n->state;
- int current_row = current_state->row;
- int current_col = current_state->col;
- 
- // Aplicar acción 1: Insertar un número en la celda
- for(int num=1; num<=9; num++){
-     State* new_state = clone_state(current_state);
-     if(insert_number(new_state, current_row, current_col, num)){
-         Node* new_node = create_node(new_state, n);
-         addNode(list, new_node);
-     } else {
-         free_state(new_state);
-     }
- }
- 
- // Aplicar acción 2: Eliminar número de la celda
- State* new_state = clone_state(current_state);
- if(delete_number(new_state, current_row, current_col)){
-     Node* new_node = create_node(new_state, n);
-     addNode(list, new_node);
- } else {
-     free_state(new_state);
- }
- 
- // Aplicar acción 3: Intercambiar fila
- for(int i=0; i<9; i++){
-     if(i != current_row){
-         State* new_state = clone_state(current_state);
-         if(swap_row(new_state, current_row, i)){
-             Node* new_node = create_node(new_state, n);
-             addNode(list, new_node);
-         } else {
-             free_state(new_state);
-         }
-     }
- }
- 
- // Aplicar acción 4: Intercambiar columna
- for(int i=0; i<9; i++){
-     if(i != current_col){
-         State* new_state = clone_state(current_state);
-         if(swap_col(new_state, current_col, i)){
-             Node* new_node = create_node(new_state, n);
-             addNode(list, new_node);
-         } else {
-             free_state(new_state);
-         }
-     }
- }
-   
-   return list;
+  int i, j, k, p;
+  int a[9]={0};
+  
+  // validación de filas
+  for(i=0; i<9; i++){
+    memset(a, 0, sizeof(a)); // reseteo del arreglo a[]
+    for(j=0; j<9; j++){
+      if(n->sudo[i][j]!=0){
+        if(a[(n->sudo[i][j]-1)]==0){
+          a[(n->sudo[i][j]-1)]=1;
+        }
+        else return 0;
+      }
+    }
+  }
+  
+  // validación de columnas
+  for(j=0; j<9; j++){
+    memset(a, 0, sizeof(a)); // reseteo del arreglo a[]
+    for(i=0; i<9; i++){
+      if(n->sudo[i][j]!=0){
+        if(a[(n->sudo[i][j]-1)]==0){
+          a[(n->sudo[i][j]-1)]=1;
+        }
+        else return 0;
+      }
+    }
+  }
+  
+  // validación de submatrices
+  for(k=0; k<9; k++){
+    memset(a, 0, sizeof(a)); // reseteo del arreglo a[]
+    for(p=0; p<9; p++){
+      int i=3*(k/3) + (p/3) ;
+      int j=3*(k%3) + (p%3) ;
+      if(n->sudo[i][j]!=0){
+        if(a[(n->sudo[i][j]-1)]==0){
+          a[(n->sudo[i][j]-1)]=1;
+        }
+        else return 0;
+      }
+    }
+  }
+  
+  return 1;
 }
 
 int is_final(Node* n){
