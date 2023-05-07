@@ -3,34 +3,30 @@
 #include "list.h"
 
 
-List* get_adj_nodes(Node* n){
+List* get_adj_nodes(Node* n) {
     List* list = createList();
-    int i, j;
-    bool found_empty_cell = false;
-
-    // Encontrar la primera casilla vacía
-    for (i = 0; i < 9 && !found_empty_cell; i++) {
-        for (j = 0; j < 9 && !found_empty_cell; j++) {
+    
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
             if (n->sudo[i][j] == 0) {
-                found_empty_cell = true;
+                for (int k = 1; k < 10; k++) {
+                    Node* nuevo = createNode();
+                    *nuevo = *n;
+                    nuevo->sudo[i][j] = k;
+                    if (is_valid(nuevo)) {
+                        pushBack(list, nuevo);
+                    } else {
+                        free(nuevo);
+                    }
+                }
+                return list;
             }
         }
     }
-
-    // Generar los nodos adyacentes para la casilla vacía encontrada
-    if (found_empty_cell) {
-        int row = i - 1;
-        int col = j - 1;
-
-        for (int num = 1; num <= 9; num++) {
-            Node* new_node = copy(n);
-            new_node->sudo[row][col] = num;
-            pushBack(list, new_node);
-        }
-    }
-
+    
     return list;
 }
+
 
 
 
