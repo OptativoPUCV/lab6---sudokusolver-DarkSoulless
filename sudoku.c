@@ -142,7 +142,7 @@ Node* DFS(Node* initial, int* cont){
     }
     free(n);
   }
-  (*cont)++;
+  (*cont)++;free(initial);
 }
 
 /*
