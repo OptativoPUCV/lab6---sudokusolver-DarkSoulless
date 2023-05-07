@@ -44,9 +44,53 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n){
-
-    return 1;
+  int i, j, k, p;
+  int a[9]={0};
+  
+  // validación de filas
+  for(i=0; i<9; i++){
+    memset(a, 0, sizeof(a)); // reseteo del arreglo a[]
+    for(j=0; j<9; j++){
+      if(n->sudo[i][j]!=0){
+        if(a[(n->sudo[i][j]-1)]==0){
+          a[(n->sudo[i][j]-1)]=1;
+        }
+        else return 0;
+      }
+    }
+  }
+  
+  // validación de columnas
+  for(j=0; j<9; j++){
+    memset(a, 0, sizeof(a)); // reseteo del arreglo a[]
+    for(i=0; i<9; i++){
+      if(n->sudo[i][j]!=0){
+        if(a[(n->sudo[i][j]-1)]==0){
+          a[(n->sudo[i][j]-1)]=1;
+        }
+        else return 0;
+      }
+    }
+  }
+  
+  // validación de submatrices
+  for(k=0; k<9; k++){
+    memset(a, 0, sizeof(a)); // reseteo del arreglo a[]
+    for(p=0; p<9; p++){
+      int i=3*(k/3) + (p/3) ;
+      int j=3*(k%3) + (p%3) ;
+      if(n->sudo[i][j]!=0){
+        if(a[(n->sudo[i][j]-1)]==0){
+          a[(n->sudo[i][j]-1)]=1;
+        }
+        else return 0;
+      }
+    }
+  }
+  
+  return 1;
 }
+
 
 
 List* get_adj_nodes(Node* n) {
