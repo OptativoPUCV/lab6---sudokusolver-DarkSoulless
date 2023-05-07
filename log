@@ -376,3 +376,81 @@ sudoku.c:64:5: error: control reaches end of non-void function [-Werror=return-t
 cc1: all warnings being treated as errors
 Compilation failed
 c00a920
+Sun 07 May 2023 02:39:33 AM UTC: 
+ sudoku.c | 57 +++++++++++++++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 47 insertions(+), 10 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:54:2: error: unknown type name ‘State’
+   54 |  State* current_state = n->state;
+      |  ^~~~~
+sudoku.c:54:26: error: ‘Node’ has no member named ‘state’
+   54 |  State* current_state = n->state;
+      |                          ^~
+sudoku.c:55:33: error: request for member ‘row’ in something not a structure or union
+   55 |  int current_row = current_state->row;
+      |                                 ^~
+sudoku.c:56:33: error: request for member ‘col’ in something not a structure or union
+   56 |  int current_col = current_state->col;
+      |                                 ^~
+sudoku.c:60:6: error: unknown type name ‘State’
+   60 |      State* new_state = clone_state(current_state);
+      |      ^~~~~
+sudoku.c:60:25: error: implicit declaration of function ‘clone_state’ [-Werror=implicit-function-declaration]
+   60 |      State* new_state = clone_state(current_state);
+      |                         ^~~~~~~~~~~
+sudoku.c:60:25: error: initialization of ‘int *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+sudoku.c:61:9: error: implicit declaration of function ‘insert_number’ [-Werror=implicit-function-declaration]
+   61 |      if(insert_number(new_state, current_row, current_col, num)){
+      |         ^~~~~~~~~~~~~
+sudoku.c:62:27: error: implicit declaration of function ‘create_node’; did you mean ‘createNode’? [-Werror=implicit-function-declaration]
+   62 |          Node* new_node = create_node(new_state, n);
+      |                           ^~~~~~~~~~~
+      |                           createNode
+sudoku.c:62:27: error: initialization of ‘Node *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+sudoku.c:63:10: error: implicit declaration of function ‘addNode’ [-Werror=implicit-function-declaration]
+   63 |          addNode(list, new_node);
+      |          ^~~~~~~
+sudoku.c:65:10: error: implicit declaration of function ‘free_state’; did you mean ‘setstate’? [-Werror=implicit-function-declaration]
+   65 |          free_state(new_state);
+      |          ^~~~~~~~~~
+      |          setstate
+sudoku.c:70:2: error: unknown type name ‘State’
+   70 |  State* new_state = clone_state(current_state);
+      |  ^~~~~
+sudoku.c:70:21: error: initialization of ‘int *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+   70 |  State* new_state = clone_state(current_state);
+      |                     ^~~~~~~~~~~
+sudoku.c:71:5: error: implicit declaration of function ‘delete_number’ [-Werror=implicit-function-declaration]
+   71 |  if(delete_number(new_state, current_row, current_col)){
+      |     ^~~~~~~~~~~~~
+sudoku.c:72:23: error: initialization of ‘Node *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+   72 |      Node* new_node = create_node(new_state, n);
+      |                       ^~~~~~~~~~~
+sudoku.c:81:10: error: unknown type name ‘State’
+   81 |          State* new_state = clone_state(current_state);
+      |          ^~~~~
+sudoku.c:81:29: error: initialization of ‘int *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+   81 |          State* new_state = clone_state(current_state);
+      |                             ^~~~~~~~~~~
+sudoku.c:82:13: error: implicit declaration of function ‘swap_row’ [-Werror=implicit-function-declaration]
+   82 |          if(swap_row(new_state, current_row, i)){
+      |             ^~~~~~~~
+sudoku.c:83:31: error: initialization of ‘Node *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+   83 |              Node* new_node = create_node(new_state, n);
+      |                               ^~~~~~~~~~~
+sudoku.c:94:10: error: unknown type name ‘State’
+   94 |          State* new_state = clone_state(current_state);
+      |          ^~~~~
+sudoku.c:94:29: error: initialization of ‘int *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+   94 |          State* new_state = clone_state(current_state);
+      |                             ^~~~~~~~~~~
+sudoku.c:95:13: error: implicit declaration of function ‘swap_col’ [-Werror=implicit-function-declaration]
+   95 |          if(swap_col(new_state, current_col, i)){
+      |             ^~~~~~~~
+sudoku.c:96:31: error: initialization of ‘Node *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+   96 |              Node* new_node = create_node(new_state, n);
+      |                               ^~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+80fc399

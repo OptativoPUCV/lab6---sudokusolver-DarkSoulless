@@ -50,22 +50,59 @@ int is_valid(Node* n){
 
 
 List* get_adj_nodes(Node* n){
-List* list=createList();
-int i,j; char new_move;
-  for(i=0;i<3;i++)
-    for(j=0;j<3;j++)
-      if(n->state[i][j]== ‘\0’){
-        Node *adj_n = (Node*) malloc(sizeof(Node));
-        adj_n->state = n->state;
-        adj_n->state[i][j] = new_move;
-        adj_n->last_move = new_move;
-        push_back(lista, adj_n);
-      }
-    }
-  }
-  return list;
+ List* list=createList();
+ State* current_state = n->state;
+ int current_row = current_state->row;
+ int current_col = current_state->col;
+ 
+ // Aplicar acción 1: Insertar un número en la celda
+ for(int num=1; num<=9; num++){
+     State* new_state = clone_state(current_state);
+     if(insert_number(new_state, current_row, current_col, num)){
+         Node* new_node = create_node(new_state, n);
+         addNode(list, new_node);
+     } else {
+         free_state(new_state);
+     }
+ }
+ 
+ // Aplicar acción 2: Eliminar número de la celda
+ State* new_state = clone_state(current_state);
+ if(delete_number(new_state, current_row, current_col)){
+     Node* new_node = create_node(new_state, n);
+     addNode(list, new_node);
+ } else {
+     free_state(new_state);
+ }
+ 
+ // Aplicar acción 3: Intercambiar fila
+ for(int i=0; i<9; i++){
+     if(i != current_row){
+         State* new_state = clone_state(current_state);
+         if(swap_row(new_state, current_row, i)){
+             Node* new_node = create_node(new_state, n);
+             addNode(list, new_node);
+         } else {
+             free_state(new_state);
+         }
+     }
+ }
+ 
+ // Aplicar acción 4: Intercambiar columna
+ for(int i=0; i<9; i++){
+     if(i != current_col){
+         State* new_state = clone_state(current_state);
+         if(swap_col(new_state, current_col, i)){
+             Node* new_node = create_node(new_state, n);
+             addNode(list, new_node);
+         } else {
+             free_state(new_state);
+         }
+     }
+ }
+   
+   return list;
 }
-
 
 int is_final(Node* n){
     return 0;
